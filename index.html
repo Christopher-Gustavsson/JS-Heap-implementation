@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Heap</title>
+</head>
+<body>
+<script>
+class Heap{
+    constructor(){
+        this.array = [];
+    }
+    left( index ){
+        //return the index
+        return (index * 2) + 1;
+    }
+    right( index ){
+        //return the index
+        return (index * 2) + 1;
+    }
+    parent( index ){
+        //return the index
+        return Math.floor((index - 1) / 2);
+    }
+    swap( index1, index2){
+        //return nothing
+        let temp = this.array[index1];
+        this.array[index1] = this.array[index2];
+        this.array[index2] = temp;
+    }
+    add( value ){
+        //return nothing
+        this.array.push(value);
+        
+        //Current refers to the added element;
+        let currentIndex = this.array.length - 1;
+        
+        let parentIndex = this.parent(currentIndex);
+        let parentVal = this.array[parentIndex];
+
+        while (value > parentVal)
+        {
+            this.swap(currentIndex, parentIndex);
+            currentIndex = parentIndex;
+            parentIndex = this.parent(currentIndex);
+            parentVal = this.array[parentIndex];
+        }
+    }
+
+    print(){
+        console.log(this.array);
+    }
+}
+
+let myHeap = new Heap();
+myHeap.array = [3,1];
+
+</script>
+    
+</body>
+</html>
